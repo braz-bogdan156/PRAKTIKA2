@@ -1,7 +1,10 @@
 #!/bin/bash
 
-for i in {1..25}; do
-    name="bohdanvyrt"
-    number=$((i + $(ls -1q "${name}"* 2>/dev/null | wc -l)))
-    touch "${name}${number}"
+# Отримати останній номер файлу або встановити 0, якщо файлів немає
+last_number=$(ls -1 | grep -Eo '[0-9]+' | sort -n | tail -n 1)
+last_number="${last_number:-0}"
+
+# Створення 25 файлів
+for ((i = last_number + 1; i <= last_number + 25; i++)); do
+    touch "dmytro$i"
 done
